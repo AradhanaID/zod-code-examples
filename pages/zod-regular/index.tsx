@@ -54,7 +54,8 @@ const InputsSchema = zod.object({
 	wantsMonthlyProduct: zod
 		.boolean().default(false),
 }).refine(({ password, confirmPassword }) => (password === confirmPassword),{
-		message: "Password don't match"
+		message: "Password don't match",
+		path: ["confirmPassword"]
 	})
 
 export default function ZodRegular() {
