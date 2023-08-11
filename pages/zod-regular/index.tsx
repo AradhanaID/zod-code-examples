@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button'
 import Image from 'next/image'
 import wingsLogo from '@/public/wings.svg'
 import { zodResolver } from '@hookform/resolvers/zod';
-import { FormControl, FormField } from '@/components/ui/form'
+import { FormField } from '@/components/ui/form'
 import { Checkbox } from '@/components/ui/checkbox'
 const inter = Inter({ subsets: ['latin'] })
 
@@ -53,7 +53,7 @@ const InputsSchema = zod.object({
 		.min(1, "Confirm password must be filled"),
 	wantsMonthlyProduct: zod
 		.boolean().default(false),
-}).refine(({ password, confirmPassword }) => (password === confirmPassword),{
+}).refine(({ password, confirmPassword }) => (password === confirmPassword), {
 		message: "Password don't match",
 		path: ["confirmPassword"]
 	})
@@ -66,11 +66,12 @@ export default function ZodRegular() {
 	const onSubmit = (data: Inputs) => {
 		console.log('submitted form');
 		console.log(data);
+		// type cleanInput = zod.infer<typeof >
 	}
 
 	return (
-		<main className={`flex min-h-screen justify-center p-12 ${inter.className}`}>
-			<div className="w-fit">
+		<main className={`flex min-h-screen w-96 justify-center p-12 mx-auto ${inter.className}`}>
+			<div className="w-full">
 				<Image src={wingsLogo} alt='WINGS' width={128} className="mx-auto" />
 				<h1 className='my-8 text-2xl font-semibold'>Developers Registration</h1>
 				<form onSubmit={handleSubmit(onSubmit)} className='space-y-4 w-fit'>
